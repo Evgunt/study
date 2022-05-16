@@ -5,6 +5,9 @@ namespace Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Src\Auth\IdentityInterface;
+use Src\Session;
+use Illuminate\Database\Capsule\Manager as DB;
+use Src\Settings;
 
 class User extends Model implements IdentityInterface
 {
@@ -21,8 +24,6 @@ class User extends Model implements IdentityInterface
         'phone',
         'img'
     ];
-
-
 
     protected static function booted()
     {
@@ -50,4 +51,24 @@ class User extends Model implements IdentityInterface
         return self::where(['login' => $credentials['login'],
             'password' => md5($credentials['password'])])->first();
     }
+
+    public function getImg()
+    {
+        return DB::select('SELECT img FROM users WHERE id=?', [Session::get('id')]);
+    }
+
+    public function setImg(): void
+    {
+        if (isset($_FILES['img']) && $_FILES['img']['error'] != 4) {
+            $filename = str_replace(' ','',basename($_FILES['img']['name']));
+            move_uploaded_file($_FILES["img"]["tmp_name"], '../public/upload/' . $filename);
+            DB::update('UPDATE users SET img=? WHERE id=?', [$filename, Session::get('id')]);
+        }
+    }
+
+    public function getAllUser(): array
+    {
+        return DB::select('SELECT * FROM users WHERE id=?', [Session::get('id')]);
+    }
+
 }

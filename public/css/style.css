@@ -116,26 +116,28 @@ main {
     font-weight: 300;
     font-size: 16px;
     color: #858176;
-}
-.catalog_menu a {
+    display: block;
     text-decoration: none;
-    color: #858176;
-    font-weight: 300;
-    font-size: 16px;
-    position: relative;
 }
+/*.catalog_menu a {*/
+/*    text-decoration: none;*/
+/*    color: #858176;*/
+/*    font-weight: 300;*/
+/*    font-size: 16px;*/
+/*    position: relative;*/
+/*}*/
 .catalog_menu:hover {
     background-color: #E3E1D0;
 }
-.catalog_menu a::after {
-    content: '>';
-    width: 15px;
-    height: 8px;
-    color: #FED15C;
-    position: absolute;
-    right: -18px;
-    top: 1px;
-}
+/*.catalog_menu a::after {*/
+/*    content: '>';*/
+/*    width: 15px;*/
+/*    height: 8px;*/
+/*    color: #FED15C;*/
+/*    position: absolute;*/
+/*    right: -18px;*/
+/*    top: 1px;*/
+/*}*/
 .icons {
     display: flex;
     justify-content: flex-end;
@@ -482,6 +484,7 @@ main {
     background: url("../img/user.png") center center no-repeat;
     width: 24px;
     height: 24px;
+    margin-right: 20px;
 }
 .cart {
     background: url("../img/shopping-bag.png") center center no-repeat;
@@ -559,14 +562,14 @@ main {
     font-size: 12px;
     padding: 15px;
     outline: none;
-    margin-top: 20px;
+    margin-bottom: 20px;
     color: #858176;
 }
 .registration_form:first-child {
     margin-top: 0;
 }
-.registration_form:last-child {
-    margin-top: 42px;
+.registration_form_submit {
+    margin-top: 25px;
     padding: 5px 52px;
     color: #858176;
     background-color: #FED15C;
@@ -610,7 +613,50 @@ main {
     cursor: pointer;
     display: block;
 }
-.login_section
+.page_section
 {
     padding: 20px 0;
 }
+.errors_message
+{
+    margin-top: 10px;
+    color: 	#CC0000;
+    font-weight: 400;
+    font-size: 20px;
+    text-align: center;
+}
+.lk_main
+{
+    padding: 55px 30px 30px;
+}
+.avatar
+{
+    width: 115px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid #73ACC7;
+    float: left;
+}
+.lk_info
+{
+    height: 120px;
+}
+.lk_left
+{
+    float: left;
+    margin-left: 50px;
+    margin-top: 25px;
+}
+.lk_login
+{
+    font-size: 30px;
+    font-weight: 400;
+}
+.avatar_title
+{
+    padding: 20px 0;
+    font-weight: 500;
+    font-size: 20px;
+    color: #73ACC7;
+}
+

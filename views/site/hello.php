@@ -1,22 +1,19 @@
 <section class="main_page">
     <form method="POST" class="search">
-        <input type="text" name="text" placeholder="Корм для..." class="search_left">
+        <input type="text" name="key" placeholder="Корм для..." class="search_left">
+        <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
         <input type="submit" value="Поиск" class="search_right">
     </form>
     <div class="clearfix"></div>
     <div class="catalog">
         <div class="catalog_title">Каталог</div>
-        <div class="catalog_menu">Лежанки</div>
-        <div class="catalog_menu">
-            <a href="#">Корма</a>
-        </div>
-        <div class="catalog_menu">
-            <a href="#">Одежда</a>
-        </div>
-        <div class="catalog_menu">Поводки</div>
-        <div class="catalog_menu">
-            <a href="#">Гигиена</a>
-        </div>
+        <?php
+            foreach ($cats as $key => $cat){
+                if($key>5)
+                    break;
+                echo '<a href="'.app()->route->getUrl('/catalog').'?id=' . $cat->id.'" class="catalog_menu">'.$cat->title.'</a>';
+            }
+        ?>
     </div>
     <div class="clearfix"></div>
     <div class="icons">
