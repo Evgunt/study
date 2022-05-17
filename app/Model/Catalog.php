@@ -2,12 +2,7 @@
 
 namespace Model;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Src\Auth\IdentityInterface;
-use Src\Session;
 use Illuminate\Database\Capsule\Manager as DB;
-use Src\Settings;
 
 class Catalog
 {
