@@ -4,6 +4,7 @@ namespace Model;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Src\Auth\Auth;
 use Src\Auth\IdentityInterface;
 use Src\Session;
 use Illuminate\Database\Capsule\Manager as DB;
@@ -52,11 +53,6 @@ class User extends Model implements IdentityInterface
             'password' => md5($credentials['password'])])->first();
     }
 
-    public function getImg()
-    {
-        return DB::select('SELECT img FROM users WHERE id=?', [Session::get('id')]);
-    }
-
     public function setImg(): void
     {
         if (isset($_FILES['img']) && $_FILES['img']['error'] != 4) {
@@ -66,9 +62,15 @@ class User extends Model implements IdentityInterface
         }
     }
 
-    public function getAllUser(): array
+    public function getAllUser($id, $token): array
     {
-        return DB::select('SELECT * FROM users WHERE id=?', [Session::get('id')]);
+        return DB::select('SELECT * FROM users WHERE id=? and token = ?', [$id, $token]);
     }
 
+    public function setToken(): array
+    {
+        $token = Auth::generateCSRF();
+        DB::update("UPDATE users SET token=? WHERE id=?", ['Bearer '.$token, Session::get('id')]);
+        return ['token' => $token];
+    }
 }

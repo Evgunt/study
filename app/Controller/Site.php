@@ -3,6 +3,7 @@
 namespace Controller;
 
 use Model\Post;
+use Src\Session;
 use Src\View;
 use Src\Request;
 use Model\User;
@@ -75,7 +76,9 @@ class Site
         }
         //Если удалось аутентифицировать пользователя, то редирект
         if (Auth::attempt($request->all())) {
-            app()->route->redirect('/lk');
+            $token = (new \Model\User)->setToken();
+            Session::set('token', 'Bearer '.$token['token']);
+            app()->route->redirect('/lk?id='.Session::get('id'));
         }
         //Если аутентификация не удалась, то сообщение об ошибке
         return new View('site.login', ['message' => 'Неправильные логин или пароль']);
@@ -91,10 +94,13 @@ class Site
     {
         if($request->method == 'POST')
             (new \Model\User)->setImg();
-
-        $avatar = (new \Model\User)->getImg();
-        $user = (new \Model\User)->getAllUser();
-        return new View('site.lk', ['img' => $avatar, 'user' => $user]);
+        $headers = getallheaders();
+        if(Session::get('token') !== null) {
+            $user = (new \Model\User)->getAllUser($request->id, Session::get('token'));
+        }
+        else
+            $user = (new \Model\User)->getAllUser($request->id, $headers['Authorization']);
+        return new View('site.lk', ['user' => $user]);
     }
 
     public function catalog(Request $request): string

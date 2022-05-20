@@ -20,7 +20,7 @@
         <?php
         if (app()->auth::check()):
             ?>
-            <a class="lk" href="<?= app()->route->getUrl('/lk') ?>"></a>
+            <a class="lk" href="<?= app()->route->getUrl('/lk?id='.app()->Session::get('id')) ?>"></a>
             <a class="cart" href="<?= app()->route->getUrl('/cart') ?>"></a>
         <?php
         else:

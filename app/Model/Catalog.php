@@ -14,10 +14,6 @@ class Catalog
     {
         return DB::select('SELECT * FROM item WHERE catalog =?', [$parent]);
     }
-    public function getBread(int $id)
-    {
-
-    }
     public function search(string $key)
     {
         return DB::select("SELECT * FROM item WHERE title LIKE '%".$key."%'");
@@ -26,5 +22,4 @@ class Catalog
     {
         return DB::select("SELECT * FROM item WHERE id=?", [$id]);
     }
-
 }

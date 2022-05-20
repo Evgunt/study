@@ -85,6 +85,4 @@ class SiteTest extends TestCase
             }
         }
     }
-
-
 }

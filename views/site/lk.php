@@ -1,8 +1,12 @@
+<?php
+    if($user)
+    {
+?>
 <section class="page_section">
     <h1 class="text_of_registration">Личный кабинет</h1>
     <div class="lk_main">
         <div class="lk_info clearfix">
-            <div class="avatar" style="background: url(<?=app()->route->getUrl('/upload/'.$img[0]->img)?>)
+            <div class="avatar" style="background: url(<?=app()->route->getUrl('/upload/'.$user[0]->img)?>)
                     center center no-repeat; background-size: cover;"></div>
             <div class="lk_left">
                 <div class="lk_login"><?=$user[0]->login?></div>
@@ -19,3 +23,15 @@
         </div>
     </div>
 </section>
+<?php
+    }
+    else{
+?>
+<section class="page_section">
+    <h1 class="text_of_registration">Личный кабинет</h1>
+    <div class="lk_main">
+        <p>Нет доступа</p>
+    </div>
+</section>
+<?php
+}
