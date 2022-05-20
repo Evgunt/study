@@ -34,7 +34,8 @@ class Site
             return new View('site.search', ['result' => $result]);
         }
         $cats = (new \Model\Catalog)->getCat();
-        return new View('site.hello',['cats'=>$cats]);
+        $userId = Session::get('id');
+        return new View('site.hello',['cats'=>$cats, 'id'=>$userId]);
     }
 
     public function signup(Request $request): string

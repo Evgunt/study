@@ -41,5 +41,4 @@ class Api
         $user = (new \Model\User)->getAllUser($request->id, $headers['Authorization']);
         (new View())->toJSON(['user' => $user]);
     }
-
 }
